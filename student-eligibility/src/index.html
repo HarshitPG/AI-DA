@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Student Eligibility Checker</title>
+    <script>
+      async function checkEligibility() {
+        const studentId = document.getElementById("studentId").value;
+        const response = await fetch(
+          `http://localhost:8000/check_eligibility?student_id=${studentId}`
+        );
+        const data = await response.json();
+        document.getElementById("result").innerText =
+          `Scholarship: ${data.scholarship ? "Eligible" : "Not Eligible"}\n` +
+          `Exam Permission: ${
+            data.exam_permission ? "Permitted" : "Not Permitted"
+          }`;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Student Eligibility Checker</h1>
+    <label for="studentId">Enter Student ID:</label>
+    <input type="text" id="studentId" />
+    <button onclick="checkEligibility()">Check</button>
+    <pre id="result"></pre>
+  </body>
+</html>
